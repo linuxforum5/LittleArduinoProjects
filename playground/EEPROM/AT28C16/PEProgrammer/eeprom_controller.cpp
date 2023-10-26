@@ -66,6 +66,7 @@ void EepromController::setWriteMode() {
 
 void EepromController::setAddress(uint16_t address) {
   this->GPIOA_value = (uint8_t)address;               // low address byte A0-7
+  this->GPIOB_value &= 0b11111000; // Clear 3 bits of previous high address byte A8-10
   this->GPIOB_value |= ((address >> 8) & 0b00000111); // 3 bits of high address byte A8-10
 }
 
